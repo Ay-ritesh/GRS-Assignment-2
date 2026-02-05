@@ -1,0 +1,22 @@
+# Compiled binaries
+MT25057_Part_A1_Server
+MT25057_Part_A1_Client
+MT25057_Part_A2_Server
+MT25057_Part_A2_Client
+MT25057_Part_A3_Server
+MT25057_Part_A3_Client
+
+# Object files
+*.o
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+
+# Perf data
+perf.data*
