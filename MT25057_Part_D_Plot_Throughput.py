@@ -20,7 +20,7 @@ import numpy as np
 SYSTEM_CONFIG = """
 System: Pop!_OS 24.04 LTS
 CPU: AMD Ryzen 7 7840HS
-RAM: 13GB DDR5
+RAM: 16GB DDR5
 """
 
 # Message sizes in bytes
@@ -28,16 +28,17 @@ message_sizes = [256, 1024, 4096, 16384, 65536]
 
 # Throughput values in Gbps (from actual experiments)
 # Format: [value_for_256B, value_for_1KB, value_for_4KB, value_for_16KB, value_for_64KB]
+# Data extracted from MT25057_Part_B_Results.csv with thread count = 4
 
 # Two-Copy (send/recv) throughput - Thread count = 4
-two_copy_throughput = [3.10, 7.07, 29.82, 87.65, 142.86]
+two_copy_throughput = [2.4644, 8.5761, 30.8045, 85.9458, 144.4618]
 
 # One-Copy (sendmsg with iovec) throughput - Thread count = 4
-one_copy_throughput = [2.61, 8.97, 28.38, 82.80, 139.67]
+one_copy_throughput = [3.5264, 8.4970, 28.9662, 84.0495, 141.3130]
 
 # Zero-Copy (MSG_ZEROCOPY) throughput - Thread count = 4
-# Note: Zero-copy shows poor performance for small messages due to overhead
-zero_copy_throughput = [0.02, 0.0002, 22.53, 62.12, 115.60]
+# Note: Zero-copy shows extremely poor performance for small messages (256B, 1KB) due to page pinning overhead
+zero_copy_throughput = [0.0135, 0.0002, 24.1708, 67.2222, 116.0761]
 
 # Create the plot
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -83,3 +84,5 @@ plt.savefig('MT25057_Part_D_Throughput_vs_MsgSize.png', dpi=300, bbox_inches='ti
 print("Plot saved: MT25057_Part_D_Throughput_vs_MsgSize.pdf/png")
 
 # plt.show()  # Commented out for headless execution
+
+# This code was generated with the assistance of Claude Opus 4.5 by Anthropic.

@@ -261,3 +261,5 @@ head -11 "$CSV_PERF"
 echo ""
 
 log_info "Done!"
+
+# This code was generated with the assistance of Claude Opus 4.5 by Anthropic.

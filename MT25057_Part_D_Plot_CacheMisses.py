@@ -20,7 +20,7 @@ import numpy as np
 SYSTEM_CONFIG = """
 System: Pop!_OS 24.04 LTS
 CPU: AMD Ryzen 7 7840HS
-RAM: 13GB DDR5
+RAM: 16GB DDR5
 """
 
 # Message sizes in bytes
@@ -29,27 +29,32 @@ message_sizes = [256, 1024, 4096, 16384, 65536]
 # L1 Cache miss rates (misses per 1000 bytes transferred)
 # Format: [value_for_256B, value_for_1KB, value_for_4KB, value_for_16KB, value_for_64KB]
 # Using thread count = 4 as reference
-# Note: These are estimated values based on typical behavior patterns
-# with actual throughput data as reference
+# Data extracted from MT25057_Part_B_Perf.csv (l1_misses / bytes_total * 1000)
 
-# Two-Copy L1 cache misses (per KB) - highest due to multiple copies
-two_copy_l1_misses = [145, 112, 78, 52, 38]
+# Two-Copy L1 cache misses (per KB) - calculated from actual perf data
+# l1_misses: 840460655, 915802302, 1327029941, 2736705870, 3624796221
+# bytes: 1540457216, 5360732160, 19254460416, 53719760896, 90294976512
+two_copy_l1_misses = [545.6, 170.8, 68.9, 50.9, 40.1]
 
-# One-Copy L1 cache misses (per KB) - medium, eliminates serialization copy
-one_copy_l1_misses = [128, 95, 65, 45, 32]
+# One-Copy L1 cache misses (per KB)
+# l1_misses: 699990944, 930106971, 1339939534, 2739983332, 3551255488
+# bytes: 2204208384, 5311047680, 18105331712, 52535803904, 88327127040
+one_copy_l1_misses = [317.6, 175.1, 74.0, 52.2, 40.2]
 
-# Zero-Copy L1 cache misses (per KB) - lowest for large messages, highest for small
-zero_copy_l1_misses = [185, 165, 58, 38, 25]
+# Zero-Copy L1 cache misses (per KB)
+# l1_misses: 9012189, 139750, 1627907592, 2361515535, 2937084137
+# bytes: 10211328, 111616, 15107805184, 42016735232, 72553332736
+zero_copy_l1_misses = [882.5, 1252.1, 107.8, 56.2, 40.5]
 
-# LLC (Last Level Cache) miss rates (per KB)
-# Two-Copy LLC misses (per KB)
-two_copy_llc_misses = [52, 42, 28, 18, 12]
+# LLC (Last Level Cache) miss rates (per KB) - using cache_misses from perf
+# Two-Copy cache_misses: 176904684, 194802187, 190715522, 217621040, 174948793
+two_copy_llc_misses = [114.8, 36.3, 9.9, 4.1, 1.9]
 
-# One-Copy LLC misses (per KB)
-one_copy_llc_misses = [45, 38, 24, 15, 10]
+# One-Copy cache_misses: 149620683, 190986817, 183434248, 177738654, 187855987
+one_copy_llc_misses = [67.9, 36.0, 10.1, 3.4, 2.1]
 
-# Zero-Copy LLC misses (per KB)
-zero_copy_llc_misses = [68, 55, 22, 12, 8]
+# Zero-Copy cache_misses: 1589260, 466695, 199045802, 279635601, 386141543
+zero_copy_llc_misses = [155.6, 4180.8, 13.2, 6.7, 5.3]
 
 # Create figure with two subplots
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
@@ -106,3 +111,5 @@ plt.savefig('MT25057_Part_D_CacheMisses_vs_MsgSize.png', dpi=300, bbox_inches='t
 print("Plot saved: MT25057_Part_D_CacheMisses_vs_MsgSize.pdf/png")
 
 # plt.show()  # Commented out for headless execution
+
+# This code was generated with the assistance of Claude Opus 4.5 by Anthropic.

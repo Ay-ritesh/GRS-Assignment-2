@@ -175,12 +175,6 @@ The experiments measure:
 3. **Port already in use**: Wait or use different port
 4. **perf not found**: Install `linux-tools-generic` and `linux-tools-$(uname -r)`
 
-## References
+---
 
-- Linux kernel MSG_ZEROCOPY: https://www.kernel.org/doc/html/latest/networking/msg_zerocopy.html
-- perf tutorial: https://perf.wiki.kernel.org/index.php/Tutorial
-- Scatter-gather I/O: man writev(2)
-
-## License
-
-This code is submitted as part of coursework for CSE638 Graduate Systems at IIIT Delhi.
+This code was generated with the assistance of Claude Opus 4.5 by Anthropic.

@@ -72,3 +72,5 @@ help:
 	@echo "  a3      - Build A3 (Zero-Copy) implementation"
 	@echo "  clean   - Remove all binaries"
 	@echo "  help    - Show this help message"
+
+# This code was generated with the assistance of Claude Opus 4.5 by Anthropic.

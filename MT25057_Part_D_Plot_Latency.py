@@ -20,7 +20,7 @@ import numpy as np
 SYSTEM_CONFIG = """
 System: Pop!_OS 24.04 LTS
 CPU: AMD Ryzen 7 7840HS
-RAM: 13GB DDR5
+RAM: 16GB DDR5
 """
 
 # Thread counts
@@ -29,15 +29,16 @@ thread_counts = [1, 2, 4, 8]
 # Latency values in microseconds (from actual experiments)
 # Format: [value_for_1_thread, value_for_2_threads, value_for_4_threads, value_for_8_threads]
 # Using message size = 4096 bytes as reference
+# Data extracted from MT25057_Part_B_Results.csv
 
 # Two-Copy (send/recv) latency
-two_copy_latency = [4.07, 4.07, 4.33, 5.14]
+two_copy_latency = [3.76, 3.79, 4.20, 4.85]
 
 # One-Copy (sendmsg with iovec) latency
-one_copy_latency = [4.18, 4.26, 4.56, 6.32]
+one_copy_latency = [4.06, 4.09, 4.47, 5.61]
 
 # Zero-Copy (MSG_ZEROCOPY) latency
-zero_copy_latency = [4.57, 4.97, 5.75, 6.92]
+zero_copy_latency = [4.50, 4.76, 5.37, 7.00]
 
 # Create the plot
 fig, ax = plt.subplots(figsize=(10, 6))
@@ -80,3 +81,5 @@ plt.savefig('MT25057_Part_D_Latency_vs_Threads.png', dpi=300, bbox_inches='tight
 print("Plot saved: MT25057_Part_D_Latency_vs_Threads.pdf/png")
 
 # plt.show()  # Commented out for headless execution
+
+# This code was generated with the assistance of Claude Opus 4.5 by Anthropic.
